@@ -1,0 +1,11 @@
+Package: LTLo
+Type: Package
+Title: The Logarithmic Transformed Lomax
+Version: 0.1.0
+Authors@R: "Camille Menezes P dos Santos <camillemennezes@gmail.com> [aut, cre]"
+Description: The Logarithmic Transformed Lomax in R
+License: Apache License (== 2.0)
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.1
