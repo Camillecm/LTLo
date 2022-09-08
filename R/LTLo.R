@@ -39,11 +39,38 @@
 #'
 #'@import stats
 #'
-#'@export
+#'@examples
 #'
-LTLo <- function(x, n, phi, sigma, tau = 1, log = FALSE, lower.tail = TRUE, log.p = FALSE){}
-
-#' @rdname LTLo
+#'
+# Densidade - Gráfico
+#'x<-seq(0,2,length=100)
+#'fx1 <- dLTLo(x=x,phi=20,sigma=20,tau=5)
+#'fx2 <- dLTLo(x=x,phi=50,sigma=20,tau=5)
+#'fx3 <- dLTLo(x=x,phi=2,sigma=5,tau=3)
+#'fx4 <- dLTLo(x=x,phi=0.05,sigma=0.9,tau=2)
+#'
+#'plot(x,fx1,type="l",col=1,yaxp=c(0,2,10),ylab=c("f(x)"))
+#'points(x,fx2,type="l",col=2)
+#'points(x,fx3,type="l",col=3)
+#'points(x,fx4,type="l",col=4)
+#'legend(1.35,1.2,lty=1, col=c(1,2,3,4),lwd=1,c("φ=20     σ=20   τ=5","φ=50     σ=20   τ=5","φ=2       σ=5      τ=3","φ=0.05  σ=0.9  τ=2"))
+#'
+# taxa de falha - gráfico
+#'x <- seq(0,3,length=100)
+#'hx1 <- hLTLo(x=x, phi=50,  sigma=20)
+#'hx2 <- hLTLo(x=x, phi=100, sigma=3.8)
+#'hx3 <- hLTLo(x=x, phi=0.02,sigma=2)
+#'
+#'par(mfrow=c(1,3))
+#'plot(x,hx1,type="l",col=1,xlim=c(0,3))
+#'plot(x,hx2,type="l",col=1,xlim=c(0,3))
+#'plot(x,hx3,type="l",col=1,xlim=c(0,3))
+#'
+#'
+#'
+#'
+#'
+#'@export
 dLTLo <- function(x, phi, sigma, tau = 1, log = FALSE){
   stopifnot(phi>0 && sigma>0 && tau>0 && phi!=1)
   fun <- ((phi-1)*sigma*(tau^sigma)*(tau+x)^(-sigma-1))/
@@ -53,7 +80,7 @@ dLTLo <- function(x, phi, sigma, tau = 1, log = FALSE){
   }
   return(fun)
 }
-#' @rdname LTLo
+#' @rdname dLTLo
 sLTLo <- function(x, phi, sigma, tau = 1, log = FALSE){
   stopifnot(phi>0 && sigma>0 && tau>0 && phi!=1)
   fun <- (log(phi)*(1-(1-phi)*(tau^sigma)*(tau+x)^(-sigma)))/log(phi)
@@ -62,7 +89,7 @@ sLTLo <- function(x, phi, sigma, tau = 1, log = FALSE){
   }
   return(fun)
 }
-#' @rdname LTLo
+#' @rdname dLTLo
 hLTLo <-function(x, phi, sigma, tau = 1, log = FALSE){
   stopifnot(phi>0 && sigma>0 && tau>0 && phi!=1)
   fun <- ((phi-1)*sigma*(tau^sigma)*(tau+x)^(-sigma-1))/
@@ -72,7 +99,7 @@ hLTLo <-function(x, phi, sigma, tau = 1, log = FALSE){
   }
   return(fun)
 }
-#' @rdname LTLo
+#' @rdname dLTLo
 pLTLo <-function(q, phi, sigma,tau, lower.tail = TRUE, log.p = FALSE){
   stopifnot(phi>0 && sigma>0 && tau>0 && phi!=1)
   fun <- 1-(log(1-(1-phi)*(tau^sigma)*(tau+q)^(-sigma))/log(phi))
@@ -84,7 +111,7 @@ pLTLo <-function(q, phi, sigma,tau, lower.tail = TRUE, log.p = FALSE){
   }
   return(fun)
 }
-#' @rdname LTLo
+#' @rdname dLTLo
 qLTLo <-function(q, phi, sigma, tau, lower.tail = TRUE, log.p = FALSE){
   stopifnot(phi>0 && sigma>0 && tau>0 && phi!=1)
   fun <- ((1-exp(log(phi)*(1-q)))/((1-phi)*tau^sigma))^(-1/sigma)-tau
@@ -96,7 +123,7 @@ qLTLo <-function(q, phi, sigma, tau, lower.tail = TRUE, log.p = FALSE){
   }
   return(fun)
 }
-#' @rdname LTLo
+#' @rdname dLTLo
 rLTLo <- function(n, phi, sigma, tau){
   stopifnot(phi>0 && sigma>0 && tau>0 && phi!=1)
   u   <- runif(n)
